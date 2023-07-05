@@ -1,0 +1,16 @@
+http:
+  host: 'localhost'
+  port: 5000
+
+db:
+  mssql:
+    url: 'localhost\SQLEXPRESS01'
+    port: 1433
+    database: 'data'
+    user: 'hauhp'
+    password: 'hauhp'
+  mongo:
+    port: 27017
+    user: 'hauhp'
+    password: 'Hauhuynh'
+    host: 'localhost'
