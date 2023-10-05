@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:@localhost:3306/app"
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  dob   DateTime @db.Date
+  todos Todo[]
+}
+
+model Todo {
+  id    Int @id @default(autoincrement())
+  from  DateTime @db.Date @default(now())
+  to    DateTime @db.Date
+  user  User @relation(fields: [uid], references: [id])
+  uid   Int
+}
+
+model Book {
+  id        Int @id @default(autoincrement())
+  name      String
+  author    Author @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
+model Author {
+  id        Int @id @default(autoincrement())
+  name      String
+  books     Book[]
+}
+
+model City {
+  id          Int @id @default(autoincrement())
+  name        String
+  population  BigInt
+  country     Country @relation(fields: [countryId], references: [id])
+  countryId   Int
+}
+
+model Country {
+  id  Int @id @default(autoincrement())
+  name String
+  cities City[]
+}
